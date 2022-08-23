@@ -6,6 +6,7 @@ import (
 	"sushipizza/internal/config"
 	"sushipizza/internal/models"
 	"sushipizza/internal/render"
+	"time"
 )
 
 type Repository struct {
@@ -23,7 +24,15 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	err := render.Template(w, r, "home.page.tmpl", &models.TemplateData{})
+	districts := []models.District{
+		{1, "Мурино", time.Now(), time.Now()},
+		{2, "Колтуши", time.Now(), time.Now()},
+	}
+	data := make(map[string]interface{})
+	data["districts"] = districts
+	err := render.Template(w, r, "home.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
 	if err != nil {
 		log.Println(err)
 	}
