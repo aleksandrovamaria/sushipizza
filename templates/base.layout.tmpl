@@ -57,7 +57,8 @@
                 <a class="nav-link active" href="#"><span class="underline">Зоны доставки</span></a>
                 <p style="margin-left: 0.5em"></p>
 
-                <a class="nav-link active" data-bs-toggle="modal" data-bs-target="#districtModal" href="#">Ваш регион: <span class="underline">Колтуши</span>
+                {{ $district := index .Data "current-district"}}
+                <a class="nav-link active" data-bs-toggle="modal" data-bs-target="#districtModal" href="#">Ваш регион: <span class="underline">{{ $district.Name}}</span>
                     <button type="button" class="btn btn-warning"
                             style="--bs-btn-padding-y: .35rem; --bs-btn-padding-x: .35rem; --bs-btn-font-size: .5rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -97,7 +98,7 @@
             <div class="modal-body">
                 <div class="list-group list-group-flush">
                     {{ range index .Data "districts" }}
-                        <a href="#" class="list-group-item list-group-item-action">{{.Name}}</a>
+                        <a href="/change-district?id={{.ID}}&name={{.Name}}" class="list-group-item list-group-item-action">{{.Name}}</a>
                     {{ end }}
 
                 </div>
